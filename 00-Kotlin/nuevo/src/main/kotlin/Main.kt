@@ -110,6 +110,17 @@ fun main(){
 
     println(respuestaMapDos)
 
+    // Filter -> Filtrar el arreglo
+    // 1) Devolver una expresión (TRUE o FALSE)
+    // 2) Nuevo arreglo filtrado
+    val respuestaFilter: List<Int> = arregloDinamico
+        .filter {   valorActual: Int ->
+            val mayoresACinco: Boolean = valorActual > 5 // Expresión Condición
+            return@filter mayoresACinco
+        }
+    val respuestaFilterDos = arregloDinamico.filter { it <= 5 }
+    println(respuestaFilter)
+    println(respuestaFilterDos)
 }
 
 // void imprimirNombre(String nombre){}
