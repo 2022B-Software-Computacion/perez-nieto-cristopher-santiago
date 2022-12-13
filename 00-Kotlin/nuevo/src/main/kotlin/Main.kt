@@ -121,6 +121,22 @@ fun main(){
     val respuestaFilterDos = arregloDinamico.filter { it <= 5 }
     println(respuestaFilter)
     println(respuestaFilterDos)
+
+    // OR AND
+    // OR -> ANY (Alguno cumple?)
+    // AND -> ALL (TODOS Ccumplen?)
+
+    val respuestaAny: Boolean = arregloDinamico
+        .any{ valorActual: Int ->
+            return@any (valorActual > 5)
+        }
+    println(respuestaAny) // true
+
+    val respuestaAll: Boolean = arregloDinamico
+        .all{ valorActual: Int ->
+            return@all (valorActual > 5)
+        }
+    println(respuestaAll) // false
 }
 
 // void imprimirNombre(String nombre){}
