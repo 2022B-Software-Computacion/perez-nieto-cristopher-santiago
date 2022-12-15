@@ -1,3 +1,8 @@
 <resources>
+    <!-- AQUÍ se declaran las variables a utilizar en los demás archivos -->
     <string name="app_name">cspnapplication</string>
+    <string name="hola_mundo"></string>
+    <color name="txtColor"></color>
+    <color name="txtBckg"></color>
+
 </resources>
