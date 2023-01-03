@@ -2,6 +2,7 @@ import java.util.*
 
 // Main.kt
 fun main(){
+    // CAMBIO
     println("Hola mundo")
 
     // Tipos de variables
@@ -227,6 +228,7 @@ class Suma( //Constructor Primario
     }
     constructor( // tercer constructor
         uno: Int,  //parametros
+
         dos: Int?    //parametros
     ):this( // llamada constructor primario
         uno,
