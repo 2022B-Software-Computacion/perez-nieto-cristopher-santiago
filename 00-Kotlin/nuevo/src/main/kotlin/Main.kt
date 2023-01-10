@@ -230,7 +230,6 @@ class Suma( //Constructor Primario
     }
     constructor( // tercer constructor
         uno: Int,  //parametros
-
         dos: Int?    //parametros
     ):this( // llamada constructor primario
         uno,
