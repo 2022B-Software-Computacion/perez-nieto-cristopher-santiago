@@ -21,6 +21,7 @@ fun main(){
                 abrirMenuAlbum()
             }
             (2) -> {
+                flag = true
                 abrirMenuCancion()
             }
             else -> println("Opción no válida")
@@ -28,13 +29,13 @@ fun main(){
     }
 
 
-    var fecha = LocalDate.parse("2023-01-09")
+    /*var fecha = LocalDate.parse("2023-01-09")
     var miCancion = Cancion(1, fecha, "Yonaguni", 2.45f, true)
     var miCancion2 = Cancion(2, fecha, "Mi verdad", 3f, false)
     var miAlbum = Album()
     miAlbum.listaCanciones.add(miCancion)
     miAlbum.listaCanciones.add(miCancion2)
-    println(miAlbum.toString())
+    println(miAlbum.toString())*/
 }
 
 fun abrirMenuAlbum(){
@@ -55,20 +56,20 @@ fun abrirMenuAlbum(){
                 crearAlbum()
             }
             (2) -> {
-                abrirMenuCancion()
+                listarAlbumes()
             }
             (3) -> {
-
+                actualizarAlbum()
             }
             (4) -> {
-
+                eliminarAlbum()
             }
             else -> println("Opción no válida")
         }
     }
 }
 
-fun crearAlbum(){
+fun leerAlbum(){
     var archivo: File? = null
     var fr: FileReader? = null
     var br: BufferedReader? = null
@@ -94,12 +95,64 @@ fun crearAlbum(){
             nuevoAlbum.esDebut = dato.toBoolean()
             dato = tokens.nextToken()
             // aquí se debe añadir una lista de canciones
+            agregarListaCanciones()
         }
 
     } catch (e: IOException) {
         e.printStackTrace()
     }
 }
+
+fun agregarListaCanciones(): MutableList<Cancion>{
+    var listaCancionesNuevas = mutableListOf<Cancion>()
+    var aux = Cancion()
+    var flag = true
+    while (flag) {
+        println("¿Quiere agregar una canción al álbum?")
+        println("Y / N")
+        if (readln().equals("N")){
+            return listaCancionesNuevas
+        }else{
+            println("Ingrese el ID de una canción")
+            aux = obtenerCancionPorId(readln().toInt())
+            listaCancionesNuevas.add(aux)
+        }
+    }
+    return listaCancionesNuevas
+}
+
+fun obtenerCancionPorId(id: Int): Cancion{
+    val listaCanciones = mutableListOf<Cancion>()
+    var cancion = Cancion()
+    try {
+        val file = File("Canciones.txt")
+        val reader = BufferedReader(FileReader(file, Charsets.UTF_8))
+        reader.lines().forEach {
+            val tokens = StringTokenizer(it, ",")
+            var dato: String = tokens.nextToken()
+            val nuevaCancion = Cancion()
+            nuevaCancion.id = dato.toInt()
+            dato = tokens.nextToken()
+            nuevaCancion.fechaEstreno = LocalDate.parse(dato)
+            dato = tokens.nextToken()
+            nuevaCancion.nombre = dato
+            dato = tokens.nextToken()
+            nuevaCancion.duracion = dato.toFloat()
+            dato = tokens.nextToken()
+            nuevaCancion.esExplicita = dato.toBoolean()
+            listaCanciones.add(nuevaCancion)
+        }
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+    listaCanciones.forEach {
+        if(it.id == id){
+            cancion = it
+        }
+    }
+    return cancion
+}
+
 fun abrirMenuCancion(){
     var flag2 = true
     while(flag2){
@@ -167,9 +220,6 @@ fun agregarCancion(){
 }
 fun leerCanciones(){
     val listaCanciones = mutableListOf<Cancion>()
-    var archivo: File? = null
-    var fr: FileReader? = null
-    var br: BufferedReader? = null
     try {
         val file = File("Canciones.txt")
         val reader = BufferedReader(FileReader(file, Charsets.UTF_8))

@@ -40,10 +40,8 @@ class Album {
     }
 
     override fun toString(): String {
-        return "Album: $nombre, Duracion: $duracionTotal min, Total canciones: $numCanciones, Fecha: $fechaLanzamiento, " +
-                "Debuta: $esDebut\n" +
-                "Canciones:\n" +
-                " $listaCanciones"
+        return "\nAlbum: $nombre, Duracion: $duracionTotal min, Total canciones: $numCanciones, Fecha: $fechaLanzamiento, " +
+                "Debuta: $esDebut"
     }
 
 

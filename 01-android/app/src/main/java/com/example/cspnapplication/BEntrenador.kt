@@ -1,10 +1,43 @@
 package com.example.cspnapplication
 
+import android.os.Parcel
+import android.os.Parcelable
+
 class BEntrenador (
+    var id: Int,
     val nombre: String?,
     val descripcion: String?,
-){
-    override fun toString(): String {
-        return "${nombre} - ${descripcion}"
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString()
+    ) {
     }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(nombre)
+        parcel.writeString(descripcion)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<BEntrenador> {
+        override fun createFromParcel(parcel: Parcel): BEntrenador {
+            return BEntrenador(parcel)
+        }
+
+        override fun newArray(size: Int): Array<BEntrenador?> {
+            return arrayOfNulls(size)
+        }
+    }
+
 }
+    /*fun toString(): String {
+        return "${nombre} - ${descripcion}"
+    }*/
+
+
