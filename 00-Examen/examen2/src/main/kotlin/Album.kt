@@ -1,3 +1,6 @@
+import java.io.File
+import java.io.FileWriter
+import java.io.IOException
 import java.time.LocalDate
 
 class Album {
@@ -22,9 +25,25 @@ class Album {
         this.listaCanciones = listaCanciones
     }
 
+    fun crearAlbum(){
+        val nombreArchivo = "albumes.txt"
+        val data = "..text to add.."
+
+        try {
+            FileWriter(nombreArchivo, true).use {
+                it.write(data)
+                println("Text appended to the file")
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
     override fun toString(): String {
-        return "Album num: $numCanciones, Fecha: $fechaLanzamiento, Album: $nombre, Duracion: $duracionTotal min, " +
-                "Debuta: $esDebut" + "\nCanciones: $listaCanciones"
+        return "Album: $nombre, Duracion: $duracionTotal min, Total canciones: $numCanciones, Fecha: $fechaLanzamiento, " +
+                "Debuta: $esDebut\n" +
+                "Canciones:\n" +
+                " $listaCanciones"
     }
 
 
