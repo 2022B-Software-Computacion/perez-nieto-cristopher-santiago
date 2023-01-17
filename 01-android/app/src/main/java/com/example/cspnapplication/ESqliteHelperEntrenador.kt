@@ -47,12 +47,12 @@ class ESqliteHelperEntrenador (
     }
 
     fun eliminarEntrenadorFormulario(id: Int): Boolean{
-        //
+        // val conexionEscritura = this.wirtableDatabase
         val conexionEscritura = writableDatabase
-        //
-        //
-        //
-        //
+        // "SELECT" * FROM ENTRENADOR WHERE ID = ?"
+        // arrayOf(
+        //    id.toString()
+        // )
         val resultadoEliminacion = conexionEscritura
             .delete(
                 "ENTRENADOR", // Nombre tabla
@@ -63,5 +63,27 @@ class ESqliteHelperEntrenador (
         )
     conexionEscritura.close()
     return if (resultadoEliminacion.toInt() == -1) false else true
+    }
+
+    fun actualizarEntrenadorFormulario(
+        nombre: String,
+        descripcion: String,
+        idActualizar: Int
+    ): Boolean {
+        val conexionEscritura = writableDatabase
+        val valoresAActualizar = ContentValues()
+        valoresAActualizar.put("nombre", nombre)
+        valoresAActualizar.put("descripcion", descripcion)
+        val resultadoActualizacion = conexionEscritura
+            .update(
+                "ENTRENADOR", // Nombre tabla
+            valoresAActualizar, // Valores a Actualizar
+                "id=?", //Clausula Where
+            arrayOf(
+                idActualizar.toString()
+            ) // Parametros clausula Where
+        )
+        conexionEscritura.close()
+        return if(resultadoActualizacion == -1) false else true
     }
 }
