@@ -99,6 +99,24 @@ class ESqliteHelperEntrenador (
         //Lógica busqueda
         val existeUsuario = resultadoConsultaLectura.moveToFirst()
         val usuarioEncontrado = BEntrenador(0, "", "")
+        val arreglo = arrayListOf<BEntrenador>()
+        if (existeUsuario){
+            do{
+                val id = resultadoConsultaLectura.getInt(0) // columna índice 0 -> id
+                val nombre = resultadoConsultaLectura.getString(1) // columna índice 1 -> NOMBRE
+                val descripcion =
+                    resultadoConsultaLectura.getString(2) // columna índice 2 -> DESCRIPCION
+                if (id != null){
+                    usuarioEncontrado.id = id
+                    usuarioEncontrado.nombre = nombre
+                    usuarioEncontrado.descripcion = descripcion
+                    arreglo.add(usuarioEncontrado)
+                }
+            }while (resultadoConsultaLectura.moveToNext())
+        }
+
+        //val existeUsuario = resultadoConsultaLectura.moveToFirst()
+
         resultadoConsultaLectura.close()
         return usuarioEncontrado
     }
