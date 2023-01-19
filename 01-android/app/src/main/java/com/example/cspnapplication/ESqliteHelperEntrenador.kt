@@ -5,64 +5,64 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class ESqliteHelperEntrenador (
+class ESqliteHelperEntrenador(
     contexto: Context?, // THIS
-): SQLiteOpenHelper (
+) : SQLiteOpenHelper(
     contexto,
     "moviles", // nombre BDD
     null,
     1
-){
+) {
     override fun onCreate(db: SQLiteDatabase?) {
         val scriptSQLCrearTablaEntrenador =
             """
-                CREATE TABLE ENTRENADOR(
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nombre VARCHAR(50),
-                descripcion VARCHAR(50)
-                )
+               CREATE TABLE ENTRENADOR(
+               id INTEGER PRIMARY KEY AUTOINCREMENT,
+               nombre VARCHAR(50),
+               descripcion VARCHAR(50)
+               ) 
             """.trimIndent()
         db?.execSQL(scriptSQLCrearTablaEntrenador)
     }
 
-    override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-    }
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
 
     fun crearEntrenador(
         nombre: String,
         descripcion: String
     ): Boolean {
-        val baseDatosEscritura = writableDatabase
+        val basedatosEscritura = writableDatabase
         val valoresAGuardar = ContentValues()
         valoresAGuardar.put("nombre", nombre)
         valoresAGuardar.put("descripcion", descripcion)
-        val resultadoGuardar = baseDatosEscritura
+        val resultadoGuardar = basedatosEscritura
             .insert(
                 "ENTRENADOR", // Nombre tabla
                 null,
                 valoresAGuardar // valores
             )
-        baseDatosEscritura.close()
-        return if(resultadoGuardar.toInt() == -1) false else true
+        basedatosEscritura.close()
+        return if (resultadoGuardar.toInt() == -1) false else true
     }
 
-    fun eliminarEntrenadorFormulario(id: Int): Boolean{
-        // val conexionEscritura = this.wirtableDatabase
+
+    fun eliminarEntrenadorFormulario(id: Int): Boolean {
+        //        val conexionEscritura = this.writableDatabase
         val conexionEscritura = writableDatabase
-        // "SELECT" * FROM ENTRENADOR WHERE ID = ?"
+        // "SELECT * FROM ENTRENADOR WHERE ID = ?"
         // arrayOf(
         //    id.toString()
         // )
         val resultadoEliminacion = conexionEscritura
             .delete(
                 "ENTRENADOR", // Nombre tabla
-            "id=?",      // Consulta Where
-            arrayOf(
-                id.toString()
-            ) // Parametros
-        )
-    conexionEscritura.close()
-    return if (resultadoEliminacion.toInt() == -1) false else true
+                "id=?", // Consulta Where
+                arrayOf(
+                    id.toString()
+                ) // Parametros
+            )
+        conexionEscritura.close()
+        return if (resultadoEliminacion.toInt() == -1) false else true
     }
 
     fun actualizarEntrenadorFormulario(
@@ -77,48 +77,49 @@ class ESqliteHelperEntrenador (
         val resultadoActualizacion = conexionEscritura
             .update(
                 "ENTRENADOR", // Nombre tabla
-            valoresAActualizar, // Valores a Actualizar
-                "id=?", //Clausula Where
-            arrayOf(
-                idActualizar.toString()
-            ) // Parametros clausula Where
-        )
+                valoresAActualizar,  // Valores a actualizar
+                "id=?", // Clausula Where
+                arrayOf(
+                    idActualizar.toString()
+                ) // Parametros clausula Where
+            )
         conexionEscritura.close()
-        return if(resultadoActualizacion == -1) false else true
+        return if (resultadoActualizacion == -1) false else true
     }
 
     fun consultarEntrenadorPorId(id: Int): BEntrenador {
+        // val baseDatosLectura = this.readableDatabase
         val baseDatosLectura = readableDatabase
-        val scriptConsultaUsuario = "SELECT * FROM ENTRENADOR WHERE ID = ?"
+        val scriptConsultarUsuario = "SELECT * FROM ENTRENADOR WHERE ID = ?"
         val resultadoConsultaLectura = baseDatosLectura.rawQuery(
-            scriptConsultaUsuario,
+            scriptConsultarUsuario, // Consulta
             arrayOf(
                 id.toString()
-            )
+            ) // Parametros consulta
         )
-        //Lógica busqueda
+        // Logica busqueda
         val existeUsuario = resultadoConsultaLectura.moveToFirst()
         var usuarioEncontrado = BEntrenador(0, "", "")
-        var arreglo = arrayListOf<BEntrenador>()
-        if (existeUsuario){
-            do{
-                val id = resultadoConsultaLectura.getInt(0) // columna índice 0 -> id
-                val nombre = resultadoConsultaLectura.getString(1) // columna índice 1 -> NOMBRE
+        val arrreglo = arrayListOf<BEntrenador>()
+        if (existeUsuario) {
+            do {
+                val id = resultadoConsultaLectura.getInt(0) // columna indice 0 -> ID
+                val nombre = resultadoConsultaLectura.getString(1) // Columna indice 1 -> NOMBRE
                 val descripcion =
-                    resultadoConsultaLectura.getString(2) // columna índice 2 -> DESCRIPCION
-                if (id != null){
-                    usuarioEncontrado = BEntrenador(0,"","")
+                    resultadoConsultaLectura.getString(2) // Columna indice 2 -> DESCRIPCION
+                if (id != null) {
+                    usuarioEncontrado = BEntrenador(0, "", "")
                     usuarioEncontrado.id = id
                     usuarioEncontrado.nombre = nombre
                     usuarioEncontrado.descripcion = descripcion
-                    arreglo.add(usuarioEncontrado)
+                    arrreglo.add(usuarioEncontrado)
                 }
-            }while (resultadoConsultaLectura.moveToNext())
+            } while (resultadoConsultaLectura.moveToNext())
         }
-
-        //val existeUsuario = resultadoConsultaLectura.moveToFirst()
-
         resultadoConsultaLectura.close()
+        baseDatosLectura.close()
         return usuarioEncontrado
     }
+
+
 }

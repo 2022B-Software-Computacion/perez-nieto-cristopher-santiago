@@ -13,8 +13,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 class MainActivity : AppCompatActivity() {
 
     val contenidoIntentExplicito =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-            if (result.resultCode == Activity.RESULT_OK){
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
                 if (result.data != null) {
                     val data = result.data
                     Log.i("intent-epn", "${data?.getStringExtra("nombreModificado")}")
@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
     val contenidoIntentImplicito = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ){
-        result ->
-        if (result.resultCode == RESULT_OK){
-            if (result.data != null){
+            result ->
+        if(result.resultCode == RESULT_OK){
+            if(result.data != null){
                 if (result.data!!.data != null){
                     val uri: Uri = result.data!!.data!!
                     val cursor = contentResolver.query(
@@ -54,16 +54,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main) // Se define qué interfaz vamos a utilizar.
+        setContentView(R.layout.activity_main)
 
-        // Base de datos SQLite
+        // Base de datos sqlite
         EBaseDeDatos.tablaEntrenador = ESqliteHelperEntrenador(this)
 
         val botonCicloVida = findViewById<Button>(R.id.btn_ciclo_vida)
         botonCicloVida
             .setOnClickListener {
                 irActividad(ACicloVida::class.java)
-        }
+            }
 
         val botonListView = findViewById<Button>(R.id.btn_ir_list_view)
         botonListView
@@ -86,32 +86,28 @@ class MainActivity : AppCompatActivity() {
             .setOnClickListener {
                 abrirActividadConParametros(CIntentExplicitoParametros::class.java)
             }
-
-        val botonSqlite = findViewById<Button>(R.id.btn_sqlite)
-        botonSqlite
-            .setOnClickListener {
-                irActividad(ECrudEntrenador::class.java)
-            }
     }
 
     fun abrirActividadConParametros(
         clase: Class<*>,
-    ){
+    ) {
         val intentExplicito = Intent(this, clase)
-        // Enviar parametros (solamente variables primitivas) a otras actividades
-        intentExplicito.putExtra("nombre", "Cristopher")
-        intentExplicito.putExtra("apellido", "Perez")
-        intentExplicito.putExtra("edad", 22)
+        // Enviar parametros (solamente variables primitivas)
+        intentExplicito.putExtra("nombre", "Adrian")
+        intentExplicito.putExtra("apellido", "Eguez")
+        intentExplicito.putExtra("edad", 33)
         intentExplicito.putExtra(
             "entrenadorPrincipal",
-            BEntrenador(1, "Cristopher", "Paleta")
+            BEntrenador(1,"Adrian", "Paleta")
         )
+
         contenidoIntentExplicito.launch(intentExplicito)
     }
 
+
     fun irActividad(
         clase: Class<*>
-    ){
+    ) {
         val intent = Intent(this, clase)
         startActivity(intent)
     }

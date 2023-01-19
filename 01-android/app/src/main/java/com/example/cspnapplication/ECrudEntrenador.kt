@@ -10,7 +10,6 @@ class ECrudEntrenador : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ecrud_entrenador)
 
-
         val botonBuscarBDD = findViewById<Button>(R.id.btn_buscar_bdd)
         botonBuscarBDD
             .setOnClickListener {
@@ -36,7 +35,6 @@ class ECrudEntrenador : AppCompatActivity() {
                     descripcion.text.toString()
                 )
             }
-
         val botonActualizarBDD = findViewById<Button>(R.id.btn_actualizar_bdd)
         botonActualizarBDD
             .setOnClickListener {
@@ -49,7 +47,6 @@ class ECrudEntrenador : AppCompatActivity() {
                     id.text.toString().toInt()
                 )
             }
-
         val botonEliminarBDD = findViewById<Button>(R.id.btn_borrar_bdd)
         botonEliminarBDD.setOnClickListener {
             val id = findViewById<EditText>(R.id.input_id)
@@ -58,6 +55,4 @@ class ECrudEntrenador : AppCompatActivity() {
             )
         }
     }
-
-
 }

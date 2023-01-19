@@ -3,7 +3,7 @@ package com.example.cspnapplication
 import android.os.Parcel
 import android.os.Parcelable
 
-class BEntrenador (
+class BEntrenador(
     var id: Int,
     var nombre: String?,
     var descripcion: String?,
@@ -13,6 +13,10 @@ class BEntrenador (
         parcel.readString(),
         parcel.readString()
     ) {
+    }
+
+    override fun toString(): String {
+        return "${nombre} - ${descripcion}"
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -36,8 +40,3 @@ class BEntrenador (
     }
 
 }
-    /*fun toString(): String {
-        return "${nombre} - ${descripcion}"
-    }*/
-
-

@@ -33,32 +33,29 @@ class BListView : AppCompatActivity() {
             .setOnClickListener {
                 anadirEntrenador(adaptador)
             }
-
-        registerForContextMenu(listView) //para mostrar una lista
+        registerForContextMenu(listView)
     }
-
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        // Llenamos las opciones del menú
+        // Llenamos las opciones del menu
         val inflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
-        // oBtener el id del ArrayListSeleccionado
+        // Obtener el id del ArrayListSeleccionado
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
         val id = info.position
         idItemSeleccionado = id
     }
-
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
-            R.id.mi_editar -> {
+            R.id.mi_editar ->{
                 "${idItemSeleccionado}"
                 return true
             }
-            R.id.mi_eliminar -> {
+            R.id.mi_eliminar ->{
                 abrirDialogo()
                 "${idItemSeleccionado}"
                 return true
@@ -66,42 +63,40 @@ class BListView : AppCompatActivity() {
             else -> super.onContextItemSelected(item)
         }
     }
-
     fun abrirDialogo(){
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Desea eliminar")
         builder.setPositiveButton(
             "Aceptar",
-            DialogInterface.OnClickListener {dialog, which ->
-                // Al aceptar eliminar el registro
+            DialogInterface.OnClickListener { dialog, which ->
+                // Al Aceptar eliminar el registro
             }
         )
         builder.setNegativeButton(
             "Cancelar",
             null
         )
+
         val opciones = resources.getStringArray(
             R.array.string_array_opciones_dialogo
         )
         val seleccionPrevia = booleanArrayOf(
             true, // Lunes seleccionado
-            false,// Martes seleccionado
-            false // Miercoles seleccionado
+            false, // Martes NO seleccionado
+            false // Miercoles NO seleccionado
         )
         builder.setMultiChoiceItems(
             opciones,
             seleccionPrevia,
-            {   dialog,
-                which,
-                isChecked ->
-                    "Dio clic en el item ${which}"
+            { dialog,
+              which,
+              isChecked ->
+                "Dio clic en el item ${which}"
             }
         )
         val dialogo = builder.create()
         dialogo.show()
     }
-
-
 
 
     fun anadirEntrenador(
