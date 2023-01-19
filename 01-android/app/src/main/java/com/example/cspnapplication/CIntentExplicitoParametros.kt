@@ -1,4 +1,4 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,6 @@ class CIntentExplicitoParametros : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cintent_explicito_parametros)
-
         val nombre = intent.getStringExtra("nombre")
         val apellido = intent.getStringExtra("apellido")
         val edad = intent.getIntExtra("edad", 0)
@@ -30,5 +29,4 @@ class CIntentExplicitoParametros : AppCompatActivity() {
         )
         finish()
     }
-
 }

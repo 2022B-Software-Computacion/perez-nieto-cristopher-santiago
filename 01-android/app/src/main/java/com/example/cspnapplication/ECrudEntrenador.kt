@@ -1,4 +1,4 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -47,7 +47,7 @@ class ECrudEntrenador : AppCompatActivity() {
                     id.text.toString().toInt()
                 )
             }
-        val botonEliminarBDD = findViewById<Button>(R.id.btn_borrar_bdd)
+        val botonEliminarBDD = findViewById<Button>(R.id.btn_eliminar_bdd)
         botonEliminarBDD.setOnClickListener {
             val id = findViewById<EditText>(R.id.input_id)
             EBaseDeDatos.tablaEntrenador!!.eliminarEntrenadorFormulario(

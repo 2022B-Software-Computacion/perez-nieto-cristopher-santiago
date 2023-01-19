@@ -1,6 +1,5 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
-import android.app.AlertDialog
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import androidx.appcompat.app.AlertDialog
 
 class BListView : AppCompatActivity() {
     val arreglo = BBaseDatosMemoria.arregloBEntrenador
@@ -97,6 +97,11 @@ class BListView : AppCompatActivity() {
         val dialogo = builder.create()
         dialogo.show()
     }
+
+
+
+
+
 
 
     fun anadirEntrenador(

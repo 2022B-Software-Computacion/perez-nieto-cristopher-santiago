@@ -6,6 +6,6 @@ import android.os.Bundle
 class GRecyclerView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_grecycler_view)
+        setContentView(R.layout.activity_grecycler_view2)
     }
 }

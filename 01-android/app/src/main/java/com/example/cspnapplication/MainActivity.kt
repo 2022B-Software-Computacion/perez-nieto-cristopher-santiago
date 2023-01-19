@@ -1,4 +1,4 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
 import android.app.Activity
 import android.content.Intent
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     val contenidoIntentImplicito = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ){
-            result ->
+        result ->
         if(result.resultCode == RESULT_OK){
             if(result.data != null){
                 if (result.data!!.data != null){
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                 irActividad(BListView::class.java)
             }
 
-        val botonIntentImplicito = findViewById<Button>(R.id.btn_it_intent_implicito)
+        val botonIntentImplicito = findViewById<Button>(R.id.btn_ir_intent_implicito)
         botonIntentImplicito
             .setOnClickListener {
                 val intentConRespuesta = Intent(

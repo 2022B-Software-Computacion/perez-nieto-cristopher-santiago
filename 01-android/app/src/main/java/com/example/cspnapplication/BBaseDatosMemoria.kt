@@ -1,4 +1,4 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
 class BBaseDatosMemoria {
     companion object {
@@ -6,15 +6,15 @@ class BBaseDatosMemoria {
         init {
             arregloBEntrenador
                 .add(
-                    BEntrenador(1, "Cristopher", "a@a.com")
+                    BEntrenador(1, "Adrian", "a@a.com")
                 )
             arregloBEntrenador
                 .add(
-                    BEntrenador(2, "Santiago", "b@b.com")
+                    BEntrenador(2,"Vicente", "b@b.com")
                 )
             arregloBEntrenador
                 .add(
-                    BEntrenador(3, "Génesis", "c@c.com")
+                    BEntrenador(3, "Carolina", "c@c.com")
                 )
         }
     }
