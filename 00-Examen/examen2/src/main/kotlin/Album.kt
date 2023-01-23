@@ -4,7 +4,7 @@ import java.io.IOException
 import java.time.LocalDate
 
 class Album {
-    var numCanciones: Int = 0
+    var id: Int = 0
     var fechaLanzamiento: LocalDate? = null
     var nombre: String = ""
     var duracionTotal: Float = 0f
@@ -14,10 +14,10 @@ class Album {
     constructor() {
     }
 
-    constructor(numCanciones: Int, fechaLanzamiento: LocalDate, nombre: String, duracionTotal: Float, esDebut: Boolean
+    constructor(id: Int, fechaLanzamiento: LocalDate, nombre: String, duracionTotal: Float, esDebut: Boolean
         , listaCanciones: MutableList<Cancion>)
     {
-        this.numCanciones = numCanciones
+        this.id = id
         this.fechaLanzamiento = fechaLanzamiento
         this.nombre = nombre
         this.duracionTotal = duracionTotal
@@ -39,9 +39,20 @@ class Album {
         }
     }
 
+    fun obtenerAtributos(): String {
+        var idsCanciones: String = ""
+        listaCanciones.forEach{
+            idsCanciones += ","+it.id.toString()
+        }
+        return "$id,$fechaLanzamiento,$nombre,$duracionTotal,$esDebut$idsCanciones"
+    }
     override fun toString(): String {
-        return "\nAlbum: $nombre, Duracion: $duracionTotal min, Total canciones: $numCanciones, Fecha: $fechaLanzamiento, " +
-                "Debuta: $esDebut"
+        var canciones: String = ""
+        listaCanciones.forEach {
+            canciones += it.nombre + "\n"
+        }
+        return "\nID: $id, Album: $nombre, Duracion: $duracionTotal min, Fecha: $fechaLanzamiento, " +
+                "Debuta: $esDebut\n"+"Canciones:\n $canciones"
     }
 
 

@@ -56,7 +56,7 @@ fun abrirMenuAlbum(){
                 crearAlbum()
             }
             (2) -> {
-                listarAlbumes()
+                leerAlbumes()
             }
             (3) -> {
                 actualizarAlbum()
@@ -69,22 +69,52 @@ fun abrirMenuAlbum(){
     }
 }
 
-fun leerAlbum(){
-    var archivo: File? = null
-    var fr: FileReader? = null
-    var br: BufferedReader? = null
-    /*val nombreArchivo = "albumes.txt"
-    val data = "..text to add.."*/
+fun crearAlbum(){
+    var miAlbum = Album()
+    var archivo: File?
+    var fw: FileWriter? = null
+    var pw: PrintWriter?
+    // Obtener los datos del Album
+    print("Escriba el id del album: ")
+    miAlbum.id = readln().toInt()
+    print("Escriba la fecha de lanzamiento de la canción (yy-mm-dd): ")
+    miAlbum.fechaLanzamiento = LocalDate.parse(readln())
+    print("Escriba el nombre del álbum: ")
+    miAlbum.nombre = readln()
+    print("Escriba la duración total del álbum: ")
+    miAlbum.duracionTotal = readln().toFloat()
+    print("Escriba V si el álbum debuta. Caso contrario, escriba F: ")
+    miAlbum.esDebut = readln() == "V"
+    miAlbum.listaCanciones = agregarListaCanciones()
     try {
-        archivo = File("Albumes.txt")
-        fr = FileReader(archivo)
-        br = BufferedReader(fr)
-        var linea: String
-        while (br.readLine().also { linea = it } != null) {
-            val tokens = StringTokenizer(linea, ",")
+        archivo = File("albumes.txt")
+        fw = FileWriter(archivo, true)
+        pw = PrintWriter(fw)
+        //
+        pw.println(miAlbum.obtenerAtributos())
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+    } finally {
+        try {
+            fw?.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+}
+fun leerAlbumes(){
+    val listaAlbumes = mutableListOf<Album>()
+    try {
+        val file = File("albumes.txt")
+        val reader = BufferedReader(FileReader(file, Charsets.UTF_8))
+        reader.lines().forEach{
+            var miListaCanciones = mutableListOf<Cancion>()
+            //miListaCanciones.clear()
+            val tokens = StringTokenizer(it, ",")
             var dato: String = tokens.nextToken()
             val nuevoAlbum = Album()
-            nuevoAlbum.numCanciones = dato.toInt()
+            nuevoAlbum.id = dato.toInt()
             dato = tokens.nextToken()
             nuevoAlbum.fechaLanzamiento = LocalDate.parse(dato)
             dato = tokens.nextToken()
@@ -93,19 +123,25 @@ fun leerAlbum(){
             nuevoAlbum.duracionTotal = dato.toFloat()
             dato = tokens.nextToken()
             nuevoAlbum.esDebut = dato.toBoolean()
-            dato = tokens.nextToken()
-            // aquí se debe añadir una lista de canciones
-            agregarListaCanciones()
+            // aquí se vuelve a realizar una búsqueda por tokens
+            while(tokens.hasMoreTokens()){
+                dato = tokens.nextToken()
+                miListaCanciones.add(obtenerCancionPorId(dato.toInt()))
+            }
+            nuevoAlbum.listaCanciones = miListaCanciones
+            listaAlbumes.add(nuevoAlbum)
         }
-
     } catch (e: IOException) {
         e.printStackTrace()
+    }
+    listaAlbumes.forEach{
+        println(it.toString())
     }
 }
 
 fun agregarListaCanciones(): MutableList<Cancion>{
     var listaCancionesNuevas = mutableListOf<Cancion>()
-    var aux = Cancion()
+    var aux: Cancion
     var flag = true
     while (flag) {
         println("¿Quiere agregar una canción al álbum?")
@@ -151,6 +187,139 @@ fun obtenerCancionPorId(id: Int): Cancion{
         }
     }
     return cancion
+}
+
+fun actualizarAlbum(){
+    val listaAlbumes = mutableListOf<Album>()
+    println("Introduzca el ID del album que desea actualizar")
+    val id = readln().toInt()
+    // Lee el archivo y genera una lista con los álbumes actuales
+    val file = File("albumes.txt")
+    val reader = BufferedReader(FileReader(file, Charsets.UTF_8))
+    reader.lines().forEach {
+        var miListaCanciones = mutableListOf<Cancion>()
+        val tokens = StringTokenizer(it, ",")
+        var dato: String = tokens.nextToken()
+        val nuevoAlbum = Album()
+        nuevoAlbum.id = dato.toInt()
+        dato = tokens.nextToken()
+        nuevoAlbum.fechaLanzamiento = LocalDate.parse(dato)
+        dato = tokens.nextToken()
+        nuevoAlbum.nombre = dato
+        dato = tokens.nextToken()
+        nuevoAlbum.duracionTotal = dato.toFloat()
+        dato = tokens.nextToken()
+        nuevoAlbum.esDebut = dato.toBoolean()
+        // aquí se vuelve a realizar una búsqueda por tokens
+        while(tokens.hasMoreTokens()){
+            dato = tokens.nextToken()
+            miListaCanciones.add(obtenerCancionPorId(dato.toInt()))
+        }
+        nuevoAlbum.listaCanciones = miListaCanciones
+        listaAlbumes.add(nuevoAlbum)
+    }
+    var albumAux = Album()
+    listaAlbumes.forEach {
+        if (it.id == id){
+            albumAux = it
+        }
+    }
+    val indiceAlbum = listaAlbumes.indexOf(albumAux)
+    // Eliminamos el album anterior
+    listaAlbumes.remove(albumAux)
+    // Actualizamos la cancion
+    print("Escriba el nuevo nombre del album: ")
+    albumAux.nombre = readln()
+    print("Escriba la nueva fecha del album: ")
+    albumAux.fechaLanzamiento = LocalDate.parse(readln())
+    print("Escriba la nueva duración del album: ")
+    albumAux.duracionTotal = readln().toFloat()
+    print("Escriba V si el álbum debuta. Caso contrario, escriba F: ")
+    albumAux.esDebut = readln() == "V"
+    // Añadimos el album actualizado
+    listaAlbumes.add(indiceAlbum, albumAux)
+
+    //println(listaAlbumes)
+
+    // Vamos a reescribir toodo el archivo
+    var archivo: File?
+    var fw: FileWriter? = null
+    var pw: PrintWriter?
+    try {
+        archivo = File("albumes.txt")
+        fw = FileWriter(archivo)
+        pw = PrintWriter(fw)
+        listaAlbumes.forEach {
+            pw.println(it.obtenerAtributos())
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    } finally {
+        try {
+            fw?.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+}
+
+fun eliminarAlbum(){
+    val listaAlbumes = mutableListOf<Album>()
+    println("Introduzca el ID del album que desea eliminar")
+    val id = readln().toInt()
+    // Lee el archivo y genera una lista con los albumes actuales
+    val file = File("albumes.txt")
+    val reader = BufferedReader(FileReader(file, Charsets.UTF_8))
+    reader.lines().forEach {
+        var miListaCanciones = mutableListOf<Cancion>()
+        val tokens = StringTokenizer(it, ",")
+        var dato: String = tokens.nextToken()
+        val nuevoAlbum = Album()
+        nuevoAlbum.id = dato.toInt()
+        dato = tokens.nextToken()
+        nuevoAlbum.fechaLanzamiento = LocalDate.parse(dato)
+        dato = tokens.nextToken()
+        nuevoAlbum.nombre = dato
+        dato = tokens.nextToken()
+        nuevoAlbum.duracionTotal = dato.toFloat()
+        dato = tokens.nextToken()
+        nuevoAlbum.esDebut = dato.toBoolean()
+        // aquí se vuelve a realizar una búsqueda por tokens
+        while(tokens.hasMoreTokens()){
+            dato = tokens.nextToken()
+            miListaCanciones.add(obtenerCancionPorId(dato.toInt()))
+        }
+        nuevoAlbum.listaCanciones = miListaCanciones
+        listaAlbumes.add(nuevoAlbum)
+    }
+    var albumAux = Album()
+    listaAlbumes.forEach {
+        if (it.id == id){
+            albumAux = it
+        }
+    }
+    listaAlbumes.remove(albumAux)
+    // Ya se tiene una lista sin el elemento
+    // Vamos a reescribir toodo el archivo
+    var archivo: File?
+    var fw: FileWriter? = null
+    var pw: PrintWriter?
+    try {
+        archivo = File("albumes.txt")
+        fw = FileWriter(archivo)
+        pw = PrintWriter(fw)
+        listaAlbumes.forEach {
+            pw.println(it.obtenerAtributos())
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    } finally {
+        try {
+            fw?.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }
 
 fun abrirMenuCancion(){
@@ -241,7 +410,9 @@ fun leerCanciones(){
     } catch (e: IOException) {
         e.printStackTrace()
     }
-    println(listaCanciones)
+    listaCanciones.forEach{
+        println(it.toString())
+    }
 }
 fun actualizarCancion(){
     val listaCanciones = mutableListOf<Cancion>()
@@ -286,7 +457,7 @@ fun actualizarCancion(){
     // Añadimos la cancion actualizada
     listaCanciones.add(indiceCancion, cancionAux)
 
-    println(listaCanciones)
+    //println(listaCanciones)
 
     // Vamos a reescribir toodo el archivo
     var archivo: File?

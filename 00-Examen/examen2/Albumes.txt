@@ -1,0 +1,5 @@
+1,2020-05-02,Exitos,200.0,false,1
+2,2022-02-06,Me Fui De Vacaciones,250.0,true,2,5
+3,2020-05-02,Bichota Tour,200.0,true,3
+4,2019-06-02,COLORES,150.0,true
+5,2019-12-25,X100pre,105.0,true

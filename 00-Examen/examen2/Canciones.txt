@@ -1,0 +1,5 @@
+1,2020-05-10,Parce,2.0,true
+2,2022-02-26,Me Porto Bonito,3.0,true
+3,2020-06-02,Bichota,3.0,true
+4,2020-01-01,La Zona,2.0,true
+5,2022-02-26,Titi Me Pregunto,3.0,true

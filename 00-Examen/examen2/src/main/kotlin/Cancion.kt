@@ -18,7 +18,7 @@ class Cancion {
         this.esExplicita = esExplicita
     }
     override fun toString(): String {
-        return "\nid: $id, Fecha: $fechaEstreno, Cancion: $nombre, Duracion: $duracion min, Explicita: $esExplicita"
+        return "id: $id, Fecha: $fechaEstreno, Cancion: $nombre, Duracion: $duracion min, Explicita: $esExplicita"
     }
 
     fun obtenerAtributos(): String {
