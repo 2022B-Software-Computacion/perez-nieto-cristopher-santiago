@@ -25,19 +25,6 @@ class Album {
         this.listaCanciones = listaCanciones
     }
 
-    fun crearAlbum(){
-        val nombreArchivo = "albumes.txt"
-        val data = "..text to add.."
-
-        try {
-            FileWriter(nombreArchivo, true).use {
-                it.write(data)
-                println("Text appended to the file")
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
 
     fun obtenerAtributos(): String {
         var idsCanciones: String = ""

@@ -28,14 +28,6 @@ fun main(){
         }
     }
 
-
-    /*var fecha = LocalDate.parse("2023-01-09")
-    var miCancion = Cancion(1, fecha, "Yonaguni", 2.45f, true)
-    var miCancion2 = Cancion(2, fecha, "Mi verdad", 3f, false)
-    var miAlbum = Album()
-    miAlbum.listaCanciones.add(miCancion)
-    miAlbum.listaCanciones.add(miCancion2)
-    println(miAlbum.toString())*/
 }
 
 fun abrirMenuAlbum(){
