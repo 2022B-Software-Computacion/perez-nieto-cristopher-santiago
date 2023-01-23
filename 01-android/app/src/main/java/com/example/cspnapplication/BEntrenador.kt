@@ -1,4 +1,4 @@
-package com.example.vaesapplication
+package com.example.cspnapplication
 
 import android.os.Parcel
 import android.os.Parcelable

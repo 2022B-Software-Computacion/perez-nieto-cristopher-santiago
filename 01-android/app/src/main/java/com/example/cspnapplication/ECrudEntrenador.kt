@@ -1,4 +1,4 @@
-package com.example.vaesapplication
+package com.example.cspnapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,6 @@
-package com.example.vaesapplication
+package com.example.cspnapplication
+
+import com.example.cspnapplication.ESqliteHelperEntrenador
 
 class EBaseDeDatos {
     companion object {
