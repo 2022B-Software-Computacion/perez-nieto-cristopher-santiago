@@ -70,7 +70,7 @@ fun main(){
 
     // ARREGLOS
 
-    // Tipos de Srrelgos
+    // Tipos de Arrelgos
 
     // Arreglo Estático
     val arregloEstatico: Array<Int> = arrayOf<Int>(1, 2, 3)
@@ -99,16 +99,16 @@ fun main(){
     println(respuestaForEach);
 
     // MAP -> Muta el arreglo (Cambia el arreglo)
-    //
-
     val respuestaMap: List<Double> = arregloDinamico
         .map{ valorActual: Int ->
             return@map valorActual.toDouble() + 100.00
         }
+    println("ejecución del MAP 1")
     println(respuestaMap);
 
     val respuestaMapDos = arregloDinamico.map { it + 15 }
 
+    println("ejecución del MAP 2")
     println(respuestaMapDos)
 
     // Filter -> Filtrar el arreglo
@@ -120,7 +120,9 @@ fun main(){
             return@filter mayoresACinco
         }
     val respuestaFilterDos = arregloDinamico.filter { it <= 5 }
+    println("ejecución del FILTER 1")
     println(respuestaFilter)
+    println("ejecución del FILTER 2")
     println(respuestaFilterDos)
 
     // OR AND
@@ -228,7 +230,6 @@ class Suma( //Constructor Primario
     }
     constructor( // tercer constructor
         uno: Int,  //parametros
-
         dos: Int?    //parametros
     ):this( // llamada constructor primario
         uno,
