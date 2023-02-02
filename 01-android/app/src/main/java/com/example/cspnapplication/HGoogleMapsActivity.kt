@@ -10,8 +10,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 
 class HGoogleMapsActivity : AppCompatActivity() {
     private lateinit var mapa: GoogleMap
@@ -29,9 +28,46 @@ class HGoogleMapsActivity : AppCompatActivity() {
         fragmentoMapa.getMapAsync { googleMap ->
             if (googleMap != null){
                 mapa = googleMap
+                establecerConfiguracionMapa()
+                val zoom = 17f
+                val quicentro = LatLng(
+                    -0.17556708490271092, -78.48014901143776
+                )
+                val titulo = "Quicentro"
+                val markQuicentro = anadirMarcador(quicentro, titulo)
+                markQuicentro.tag = titulo
+
+                val poliLineaUno = googleMap
+                    .addPolyline(
+                        PolylineOptions()
+                            .clickable(true)
+                            .add(
+                                LatLng(-0.1759187040647396,-78.48506472421384),
+                                LatLng(-0.17632468492901104,-78.48265589308046),
+                                LatLng(-0.17746143130181483,-78.4770533307815)
+                            )
+                    )
+                poliLineaUno.tag = "linea-1" // <- ID
+
+                // POLIGONO
+                val poligonoUno = googleMap
+                    .addPolygon(
+                        PolygonOptions()
+                            .clickable(true)
+                            .add(
+                                LatLng(-0.1759187040647396,-78.48506472421384),
+                                LatLng(-0.17632468492901104,-78.48265589308046),
+                                LatLng(-0.17746143130181483,-78.4770533307815)
+                            )
+                    )
+                poligonoUno.fillColor = -0xc771c4
+                poligonoUno.tag = "poligono-2" // <- ID
+                escucharListeners()
+
             }
         }
     }
+
     fun establecerConfiguracionMapa(){
         val contexto = this.applicationContext
         with(mapa) {
@@ -75,12 +111,12 @@ class HGoogleMapsActivity : AppCompatActivity() {
         }
     }
 
-    fun anadirMarcador(latLng: LatLng, title: String){
-        mapa.addMarker(
+    fun anadirMarcador(latLng: LatLng, title: String): Marker {
+        return mapa.addMarker(
             MarkerOptions()
                 .position(latLng)
                 .title(title)
-        )
+        )!!
     }
 
     fun moverCamaraConZoom(latLng: LatLng, zoom: Float = 10f){
