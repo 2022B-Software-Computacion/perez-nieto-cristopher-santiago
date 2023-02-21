@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gmail_blue">#4681EA</color>
+    <color name="gmail_brown">#C6231C</color>
+    <color name="gmail_red">#E94535</color>
+    <color name="gmail_yellow">#FEBD07</color>
+    <color name="gmail_green">#35A751</color>
+
 </resources>
