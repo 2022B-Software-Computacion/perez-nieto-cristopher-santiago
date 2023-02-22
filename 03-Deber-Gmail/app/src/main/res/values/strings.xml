@@ -11,4 +11,6 @@
     <string name="menu_principal">Primary Messages</string>
     <string name="menu_promotions">Promotions</string>
     <string name="menu_social">Social</string>
+
+    <string name="primary">Primary</string>
 </resources>

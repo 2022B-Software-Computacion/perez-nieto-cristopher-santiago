@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.gmail.R
 import com.example.gmail.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -16,12 +19,12 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -32,6 +35,7 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
         return root
     }
 
@@ -39,4 +43,6 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

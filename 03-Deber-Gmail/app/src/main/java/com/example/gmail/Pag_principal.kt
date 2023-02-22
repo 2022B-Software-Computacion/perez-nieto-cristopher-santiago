@@ -11,9 +11,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.gmail.databinding.ActivityPagPrincipalBinding
+import com.example.gmail.ui.home.CorreoProvider
+import com.example.gmail.ui.home.adapter.CorreoAdapter
 
-class pag_principal : AppCompatActivity() {
+class Pag_principal : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityPagPrincipalBinding
@@ -42,6 +46,8 @@ class pag_principal : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        initRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -53,5 +59,11 @@ class pag_principal : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_pag_principal)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun initRecyclerView() {
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_correos)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = CorreoAdapter(CorreoProvider.correosList)
     }
 }
