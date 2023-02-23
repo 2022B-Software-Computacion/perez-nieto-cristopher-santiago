@@ -3,39 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
+
+    <ImageView
+        android:id="@+id/iv_correo_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/black" />
 
     <TextView
         android:id="@+id/tv_correo_emisor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_correo_image"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068" />
+
+        tools:background="@color/gmail_green"
+        tools:text="Emisor" />
 
     <TextView
         android:id="@+id/tv_correo_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/tv_correo_emisor"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_correo_emisor"
-        app:layout_constraintTop_toBottomOf="@+id/tv_correo_emisor" />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_correo_image"
+        app:layout_constraintTop_toBottomOf="@+id/tv_correo_emisor"
+        tools:background="@color/gmail_green"
+        tools:text="Contenido" />
 
     <TextView
         android:id="@+id/tv_correo_cont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/tv_correo_desc"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_correo_desc"
-        app:layout_constraintTop_toBottomOf="@+id/tv_correo_desc" />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_correo_image"
+        app:layout_constraintTop_toBottomOf="@+id/tv_correo_desc"
+
+        tools:background="@color/gmail_green"
+        tools:text="Descripción" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

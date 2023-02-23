@@ -48,6 +48,7 @@ class Pag_principal : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         initRecyclerView()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
