@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gmail.databinding.ActivityPagPrincipalBinding
@@ -21,17 +22,18 @@ class Pag_principal : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityPagPrincipalBinding
-
+    //private lateinit var binding2: ActivityPagPrincipalBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityPagPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initRecyclerView()
 
         setSupportActionBar(binding.appBarPagPrincipal.toolbar)
 
         binding.appBarPagPrincipal.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Enviar correos próximamente", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -47,7 +49,6 @@ class Pag_principal : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        initRecyclerView()
 
     }
 
@@ -63,8 +64,11 @@ class Pag_principal : AppCompatActivity() {
     }
 
     fun initRecyclerView() {
+        val manager = LinearLayoutManager(this)
+        val decoration = DividerItemDecoration(this, manager.orientation)
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_correos)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = manager
         recyclerView.adapter = CorreoAdapter(CorreoProvider.correosList)
+        recyclerView.addItemDecoration(decoration)
     }
 }
