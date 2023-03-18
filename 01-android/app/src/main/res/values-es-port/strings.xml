@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hola_mundo">Hola mundo C4</string>
-    <color name="txtColor">#FFEB3B</color>
-    <color name="txtBckg">#000000</color>
-</resources>

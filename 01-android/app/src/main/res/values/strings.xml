@@ -1,9 +1,6 @@
 <resources>
-    <!-- AQUÍ se declaran las variables a utilizar en los demás archivos -->
-    <string name="app_name">cspnapplication</string>
-    <string name="hola_mundo"></string>
-    <color name="txtColor"></color>
-    <color name="txtBckg"></color>
+    <string name="app_name">vaesapplication</string>
+    <string name="hola_mundo">Hola mundo</string>
     <string name="title_activity_aciclo_vida">ACicloVida</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
