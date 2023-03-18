@@ -1,4 +1,4 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.cspnapplication.databinding.ActivityHgoogleMapsBinding
+import com.example.vaesapplication.databinding.ActivityHgoogleMapsBinding
 
 class HGoogleMaps : AppCompatActivity(), OnMapReadyCallback {
 

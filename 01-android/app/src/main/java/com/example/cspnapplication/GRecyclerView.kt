@@ -1,4 +1,4 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,16 +10,16 @@ class GRecyclerView : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_grecycler_view2)
-
+        setContentView(R.layout.activity_grecycler_view)
+        // Definir lista
         val listaEntrenador = arrayListOf<BEntrenador>()
         listaEntrenador
-            .add(BEntrenador(1, "Adrian", "Eguez"))
+            .add(BEntrenador(1,"Adrian","Eguez"))
         listaEntrenador
-            .add(BEntrenador(2, "Vicente", "Sarzosa"))
+            .add(BEntrenador(2,"Vicente","Sarzosa"))
         // Inicializar Recycler View
         val recyclerView = findViewById<RecyclerView>(R.id.rv_entrenadores)
-        inicializarRecyclerView(listaEntrenador, recyclerView)
+        inicializarRecyclerView(listaEntrenador,recyclerView)
     }
     fun inicializarRecyclerView(
         lista:ArrayList<BEntrenador>,
@@ -35,6 +35,7 @@ class GRecyclerView : AppCompatActivity() {
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         adaptador.notifyDataSetChanged()
     }
+
 
     fun aumentarTotalLikes(){
         totalLikes = totalLikes + 1

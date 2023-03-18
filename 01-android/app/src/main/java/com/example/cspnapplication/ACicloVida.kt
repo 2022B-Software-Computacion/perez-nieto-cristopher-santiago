@@ -1,4 +1,4 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.cspnapplication.databinding.ActivityAcicloVidaBinding
+import com.example.vaesapplication.databinding.ActivityAcicloVidaBinding
 
 class ACicloVida : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.provider.ContactsContract
 import android.util.Log
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.cspnapplication.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -93,8 +94,8 @@ class MainActivity : AppCompatActivity() {
                 irActividad(ECrudEntrenador::class.java)
             }
 
-        val botonRecyclerView = findViewById<Button>(R.id.btn_recycler_view)
-        botonRecyclerView
+        val botonRView = findViewById<Button>(R.id.btn_revcycler_view)
+        botonRView
             .setOnClickListener {
                 irActividad(GRecyclerView::class.java)
             }
@@ -113,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
         val botonFirestore = findViewById<Button>(R.id.btn_intent_firestore)
         botonFirestore
-            .setOnClickListener{
+            .setOnClickListener {
                 irActividad(JFirebaseFirestore::class.java)
             }
     }

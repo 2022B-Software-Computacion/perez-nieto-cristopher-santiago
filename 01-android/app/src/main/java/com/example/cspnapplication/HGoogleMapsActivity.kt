@@ -1,6 +1,5 @@
-package com.example.cspnapplication
+package com.example.vaesapplication
 
-import android.content.Context
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,29 +15,31 @@ import com.google.android.gms.maps.model.*
 class HGoogleMapsActivity : AppCompatActivity() {
     private lateinit var mapa: GoogleMap
     var permisos = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hgoogle_maps2)
         solicitarPermisos()
         iniciarLogicaMapa()
         val boton = findViewById<Button>(R.id.btn_ir_carolina)
-        boton.setOnClickListener {
-            irCarolina()
-        }
+                boton.
+                setOnClickListener {
+                    irCarolina()
+                }
     }
 
     fun irCarolina(){
         val carolina = LatLng(-0.1825684318486696,
-        -78.48447277600916)
+            -78.48447277600916)
         val zoom = 17f
         moverCamaraConZoom(carolina, zoom)
     }
 
-    fun iniciarLogicaMapa(){
+    fun iniciarLogicaMapa() {
         val fragmentoMapa = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         fragmentoMapa.getMapAsync { googleMap ->
-            if (googleMap != null){
+            if (googleMap != null) {
                 mapa = googleMap
                 establecerConfiguracionMapa()
                 val zoom = 17f
@@ -54,9 +55,12 @@ class HGoogleMapsActivity : AppCompatActivity() {
                         PolylineOptions()
                             .clickable(true)
                             .add(
-                                LatLng(-0.1759187040647396,-78.48506472421384),
-                                LatLng(-0.17632468492901104,-78.48265589308046),
-                                LatLng(-0.17746143130181483,-78.4770533307815)
+                                LatLng(-0.1759187040647396,
+                                    -78.48506472421384),
+                                LatLng(-0.17632468492901104,
+                                    -78.48265589308046),
+                                LatLng(-0.17746143130181483,
+                                    -78.4770533307815)
                             )
                     )
                 poliLineaUno.tag = "linea-1" // <- ID
@@ -67,9 +71,12 @@ class HGoogleMapsActivity : AppCompatActivity() {
                         PolygonOptions()
                             .clickable(true)
                             .add(
-                                LatLng(-0.1771546902239471,-78.48344981495214),
-                                LatLng(-0.17968981486125768,-78.48269198043828),
-                                LatLng(-0.17710958124147777,-78.48142892291516)
+                                LatLng(-0.1771546902239471,
+                                    -78.48344981495214),
+                                LatLng(-0.17968981486125768,
+                                    -78.48269198043828),
+                                LatLng(-0.17710958124147777,
+                                    -78.48142892291516)
                             )
                     )
                 poligonoUno.fillColor = -0xc771c4
@@ -79,7 +86,6 @@ class HGoogleMapsActivity : AppCompatActivity() {
             }
         }
     }
-
     fun establecerConfiguracionMapa(){
         val contexto = this.applicationContext
         with(mapa) {
@@ -98,17 +104,18 @@ class HGoogleMapsActivity : AppCompatActivity() {
 
     }
 
+
     fun escucharListeners(){
         mapa.setOnPolygonClickListener {
             Log.i("mapa", "setOnPolygonClickListener ${it}")
-            it.tag //ID
+            it.tag // ID
         }
         mapa.setOnPolylineClickListener {
-            Log.i("mapa", "SetinPolylineClickListener ${it}")
+            Log.i("mapa", "setOnPolylineClickListener ${it}")
             it.tag // ID
         }
         mapa.setOnMarkerClickListener {
-            Log.i("mapa", "SetinMarkerClickListener ${it}")
+            Log.i("mapa", "setOnMarkerClickListener ${it}")
             it.tag // ID
             return@setOnMarkerClickListener true
         }
@@ -122,6 +129,7 @@ class HGoogleMapsActivity : AppCompatActivity() {
             Log.i("mapa", "setOnCameraIdleListener")
         }
     }
+
 
     fun anadirMarcador(latLng: LatLng, title: String): Marker {
         return mapa.addMarker(
@@ -143,18 +151,18 @@ class HGoogleMapsActivity : AppCompatActivity() {
         val permisosFineLocation = ContextCompat
             .checkSelfPermission(
                 contexto,
-                android.Manifest.permission.ACCESS_FINE_LOCATION // Permiso que van a chekear
+                android.Manifest.permission.ACCESS_FINE_LOCATION // permiso que van a checkear
             )
         val tienePermisos = permisosFineLocation == PackageManager.PERMISSION_GRANTED
-        if (tienePermisos){
+        if (tienePermisos) {
             permisos = true
         } else {
             ActivityCompat.requestPermissions(
                 this, // Contexto
-                arrayOf(    // Arreglo Permisos
+                arrayOf(  // Arreglo Permisos
                     android.Manifest.permission.ACCESS_FINE_LOCATION
                 ),
-                1 // Código de petición de los permisos
+                1  // Codigo de peticion de los permisos
             )
         }
     }
