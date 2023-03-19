@@ -47,10 +47,10 @@ class AlbumMain : AppCompatActivity() {
                 adapter.setOnItemClickListener(object : AlbumAdapter.onItemClickListener{
                     override fun onItemClick(position: Int) {
                         val idAlbum = listaAlbumes[position].id
-                        Toast.makeText(this@AlbumMain, "ID:   $idAlbum", Toast.LENGTH_SHORT).show()
-                        val btnEditarAlbum = findViewById<Button>(R.id.btn_actualizar_cancion)
+                        Toast.makeText(this@AlbumMain, "id:   $idAlbum", Toast.LENGTH_SHORT).show()
+                        val btnEditarAlbum = findViewById<Button>(R.id.btn_actualizar_album)
                         btnEditarAlbum.setOnClickListener {
-                            enviarDatos(ActualizarCancion::class.java, idRestaurant)
+                            enviarDatos(ActualizarCancion::class.java, idAlbum)
                         }
                     }
                 })
@@ -60,9 +60,9 @@ class AlbumMain : AppCompatActivity() {
                 Toast.makeText(this,it.toString(), Toast.LENGTH_SHORT).show()
             }
 
-        val btnCrearAlbum = findViewById<Button>(R.id.btn_agregar_cancion)
+        val btnCrearAlbum = findViewById<Button>(R.id.btn_agregar_album)
         btnCrearAlbum.setOnClickListener {
-            irActividad(CrearCancion::class.java)
+            irActividad(CrearAlbum::class.java)
         }
 
     }

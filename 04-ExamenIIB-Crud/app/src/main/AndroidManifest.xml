@@ -14,6 +14,12 @@
         android:theme="@style/Theme.Crud"
         tools:targetApi="31">
         <activity
+            android:name=".CrearAlbum"
+            android:exported="false" />
+        <activity
+            android:name=".ActualizarAlbum"
+            android:exported="false" />
+        <activity
             android:name=".ActualizarCancion"
             android:exported="false" />
         <activity

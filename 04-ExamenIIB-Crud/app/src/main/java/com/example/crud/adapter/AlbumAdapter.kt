@@ -27,12 +27,12 @@ class AlbumAdapter(private val listaAlbumes: ArrayList<Album>):
     }
 
     class AlbumViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
-        val nombreAlbum: TextView = itemView.findViewById(R.id.tv_nombre_album)
-        val duracion: TextView = itemView.findViewById(R.id.tv_duracion_album)
-        val fechaLanzamiento: TextView = itemView.findViewById(R.id.tv_fecha_lanzamiento)
-        val esLanzamiento : TextView = itemView.findViewById(R.id.tv_es_lanzamiento)
+        val nombreAlbum: TextView = itemView.findViewById(R.id.tv_titulo_album_2)
+        val duracion: TextView = itemView.findViewById(R.id.tv_duracion_album_2)
+        val fechaLanzamiento: TextView = itemView.findViewById(R.id.tv_fecha_lanzamiento_2)
+        val esLanzamiento : TextView = itemView.findViewById(R.id.tv_es_lanzamiento_album_2)
 
-        val btnDeleteRestaurant : Button = itemView.findViewById(R.id.btnRestaurantDelete)
+        val btnDeleteRestaurant : Button = itemView.findViewById(R.id.btn_eliminar_album)
 
         init {
             itemView.setOnClickListener {
@@ -52,7 +52,7 @@ class AlbumAdapter(private val listaAlbumes: ArrayList<Album>):
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val item = listaAlbumes[position]
-        holder.nombreAlbum.text = listaAlbumes[position].nombre
+        holder.nombreAlbum.text = listaAlbumes[position].titulo
         holder.duracion.text = listaAlbumes[position].duracion.toString()
         holder.fechaLanzamiento.text = listaAlbumes[position].fechaLanzamiento
         holder.esLanzamiento.text = listaAlbumes[position].esLanzamiento.toString()

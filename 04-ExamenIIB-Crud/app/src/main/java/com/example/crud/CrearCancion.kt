@@ -23,31 +23,31 @@ class CrearCancion : AppCompatActivity() {
         val anio  = findViewById<EditText>(R.id.et_anio)
         val lanzamiento  = findViewById<EditText>(R.id.et_lanzamiento)
 
-        val btnAgregarCancion = findViewById<Button>(R.id.btn_agregar_album)
+        val btnAgregarCancion = findViewById<Button>(R.id.btn_agregar_cancion)
         btnAgregarCancion.setOnClickListener {
             if (tituloCancion.text.isNotEmpty()
                 && artista.text.isNotEmpty()
                 && anio.text.isNotEmpty()
                 && lanzamiento.text.isNotEmpty()
             ){
-                val lanzamientoString = lanzamiento.text.toString()
-                val esLanzamiento = lanzamientoString.toBoolean()
+                val estrenoString = lanzamiento.text.toString()
+                val esEstreno = estrenoString.toBoolean()
 
 
                 val data = hashMapOf(
-                    "titulo" to tituloCancion.text.toString(),
-                    "lanzamiento" to esLanzamiento,
-                    "anio" to anio.text.toString(),
-                    "artista" to artista.text.toString()
+                    "nombre" to tituloCancion.text.toString(),
+                    "artista" to artista.text.toString(),
+                    "fechaEstreno" to anio.text.toString(),
+                    "esEstreno" to esEstreno
                 )
 
                 database.collection("Cancion").add(data).
                 addOnSuccessListener {
-                    Toast.makeText(this, "Ha añadido una canción", Toast.LENGTH_SHORT).show()
-                    irActividad(AlbumMain::class.java)
+                    Toast.makeText(this, "¡Ha añadido una canción!", Toast.LENGTH_SHORT).show()
+                    irActividad(CancionMain::class.java)
                 }.addOnFailureListener {
                     Toast.makeText(this, "Error al crear la canción", Toast.LENGTH_SHORT).show()
-                    irActividad(AlbumMain::class.java)
+                    irActividad(CancionMain::class.java)
                 }
             }
         }
