@@ -20,7 +20,7 @@ class ActualizarAlbum : AppCompatActivity() {
 
         val bundle = intent.extras
         val albumID = bundle?.getString("id")
-        //Toast.makeText(this, "Id:   $idRestaurant", Toast.LENGTH_SHORT).show()
+
         var docRef = albumID?.let { database.collection("Album").document(it) }
 
         val tituloAlbum = findViewById<EditText>(R.id.et_titulo_album)

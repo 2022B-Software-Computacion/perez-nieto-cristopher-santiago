@@ -17,7 +17,7 @@ class AlbumMain : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var listaAlbumes : ArrayList<Album>
     private var database = Firebase.firestore
-    var idRestaurant = ""
+    var idAlbum = ""
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,10 +47,10 @@ class AlbumMain : AppCompatActivity() {
                 adapter.setOnItemClickListener(object : AlbumAdapter.onItemClickListener{
                     override fun onItemClick(position: Int) {
                         val idAlbum = listaAlbumes[position].id
-                        Toast.makeText(this@AlbumMain, "id:   $idAlbum", Toast.LENGTH_SHORT).show()
-                        val btnEditarAlbum = findViewById<Button>(R.id.btn_actualizar_album)
+                        Toast.makeText(this@AlbumMain, "id $idAlbum", Toast.LENGTH_SHORT).show()
+                        val btnEditarAlbum = findViewById<Button>(R.id.btn_editar_album)
                         btnEditarAlbum.setOnClickListener {
-                            enviarDatos(ActualizarCancion::class.java, idAlbum)
+                            enviarDatos(ActualizarAlbum::class.java, idAlbum)
                         }
                     }
                 })
@@ -79,4 +79,5 @@ class AlbumMain : AppCompatActivity() {
         intent.putExtra("id", id)
         startActivity(intent)
     }
+
 }

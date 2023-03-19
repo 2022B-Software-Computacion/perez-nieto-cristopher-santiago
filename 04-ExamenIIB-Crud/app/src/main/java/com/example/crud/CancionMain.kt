@@ -24,7 +24,7 @@ class CancionMain : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cancion_main)
 
-        recyclerView = findViewById(R.id.recyclerDishes)
+        recyclerView = findViewById(R.id.recycler_canciones)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         listaCanciones = arrayListOf()
@@ -46,7 +46,7 @@ class CancionMain : AppCompatActivity() {
                 adapter.setOnItemClickListener(object : CancionAdapter.onItemClickListener{
                     override fun onItemClick(position: Int) {
                         val idCancion = listaCanciones[position].id
-                        Toast.makeText(this@CancionMain, "id:   $idCancion", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@CancionMain, "id: $idCancion", Toast.LENGTH_SHORT).show()
                         val btnEditarCancion = findViewById<Button>(R.id.btn_actualizar_cancion)
                         btnEditarCancion.setOnClickListener {
                             enviarDatos(ActualizarCancion::class.java, idCancion)

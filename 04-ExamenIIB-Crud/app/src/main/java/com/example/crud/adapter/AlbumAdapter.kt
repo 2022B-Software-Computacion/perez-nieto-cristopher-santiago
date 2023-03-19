@@ -32,7 +32,7 @@ class AlbumAdapter(private val listaAlbumes: ArrayList<Album>):
         val fechaLanzamiento: TextView = itemView.findViewById(R.id.tv_fecha_lanzamiento_2)
         val esLanzamiento : TextView = itemView.findViewById(R.id.tv_es_lanzamiento_album_2)
 
-        val btnDeleteRestaurant : Button = itemView.findViewById(R.id.btn_eliminar_album)
+        val btnEliminarAlbum : Button = itemView.findViewById(R.id.btn_eliminar_album)
 
         init {
             itemView.setOnClickListener {
@@ -57,7 +57,7 @@ class AlbumAdapter(private val listaAlbumes: ArrayList<Album>):
         holder.fechaLanzamiento.text = listaAlbumes[position].fechaLanzamiento
         holder.esLanzamiento.text = listaAlbumes[position].esLanzamiento.toString()
 
-        holder.btnDeleteRestaurant.setOnClickListener {
+        holder.btnEliminarAlbum.setOnClickListener {
             val db = FirebaseFirestore.getInstance()
             val activity = it.context as AppCompatActivity
             val builder = AlertDialog.Builder(activity)

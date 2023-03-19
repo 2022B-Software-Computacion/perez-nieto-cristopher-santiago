@@ -45,15 +45,15 @@ class CancionAdapter(private val listaCanciones: ArrayList<Cancion>) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CancionAdapter.CancionViewHolder {
+    ): CancionViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_list_view_canciones,
             parent, false)
-        return CancionAdapter.CancionViewHolder(itemView, mListener)
+        return CancionViewHolder(itemView, mListener)
     }
 
     override fun getItemCount(): Int = listaCanciones.size
 
-    override fun onBindViewHolder(holder: CancionAdapter.CancionViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CancionViewHolder, position: Int) {
         val item = listaCanciones[position]
         holder.nombreCancion.text = listaCanciones[position].nombre
         holder.artista.text = listaCanciones[position].artista
